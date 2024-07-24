@@ -11,15 +11,19 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
     // Calculate total drinks
     const totalDrinks = guests * hours * drinkRate;
 
-    // Breakdown by drink type
-    const cocktails = totalDrinks * 0.4;
-    const beer = totalDrinks * 0.3;
-    const wine = totalDrinks * 0.2;
-    const nonAlcoholic = totalDrinks * 0.1;
+    // Split guests by drink preference
+    const liquorDrinkers = guests * 0.5;
+    const beerDrinkers = guests * 0.3;
+    const wineDrinkers = guests * 0.2;
+
+    // Calculate total drinks by type
+    const liquorDrinks = liquorDrinkers * hours * drinkRate;
+    const beerDrinks = beerDrinkers * hours * drinkRate;
+    const wineDrinks = wineDrinkers * hours * drinkRate;
 
     // Calculate ounces of liquor needed for cocktails
     const ouncesPerCocktail = 1.5;
-    const totalOunces = cocktails * ouncesPerCocktail;
+    const totalOunces = liquorDrinks * ouncesPerCocktail;
 
     // Convert ounces to bottles
     const litersPerBottle = 33.814;
@@ -27,11 +31,15 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
     const bottlesFromLiters = totalOunces / litersPerBottle;
     const bottlesFrom750ml = totalOunces / mlPerBottle;
 
+    // Calculate total volume of beer needed (in pints)
+    const pintsPerBeer = 1;  // 1 pint = 16 ounces
+    const totalBeerPints = beerDrinks * pintsPerBeer;
+
     // Specific quantities
-    const beerCases = Math.ceil(beer / caseSize);
-    const beerKegs = Math.ceil(beer / kegSize);
-    const wineBottles = Math.ceil(wine / 5);
-    const liquorBottles = Math.ceil(cocktails * 1.5 / 25.4);
+    const beerCases = Math.ceil(totalBeerPints / caseSize);
+    const beerKegs = Math.ceil(totalBeerPints / kegSize);
+    const wineBottles = Math.ceil(wineDrinks / 5); // Assume 5 glasses per bottle
+    const liquorBottles = Math.ceil(totalOunces / 25.4); // Convert total ounces to 750ml bottles
 
     // Calculate ice and napkins
     const icePounds = guests * 1.5;
@@ -42,14 +50,13 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
     document.getElementById('result').innerHTML = `
         <h2>Estimated Alcohol Requirements and Additional Supplies</h2>
         <p>Total Drinks: ${totalDrinks.toFixed(2)}</p>
-        <p>Cocktails: ${cocktails.toFixed(2)} drinks (Approx. ${liquorBottles} bottles of liquor)</p>
-        <p>Beer: ${beer.toFixed(2)} drinks</p>
+        <p>Liquor: ${liquorDrinks.toFixed(2)} drinks (Approx. ${liquorBottles} bottles of 750ml liquor)</p>
+        <p>Beer: ${beerDrinks.toFixed(2)} drinks</p>
         <ul>
             <li>Approx. ${beerCases} cases of ${caseSize}-pack</li>
             <li>Approx. ${beerKegs} kegs of ${kegSize} pints</li>
         </ul>
-        <p>Wine: ${wine.toFixed(2)} drinks (Approx. ${wineBottles} bottles)</p>
-        <p>Non-Alcoholic: ${nonAlcoholic.toFixed(2)} drinks</p>
+        <p>Wine: ${wineDrinks.toFixed(2)} drinks (Approx. ${wineBottles} bottles)</p>
         <h3>Liquor Bottle Requirements</h3>
         <p>Liquor Bottles (1 liter): ${bottlesFromLiters.toFixed(2)}</p>
         <p>Liquor Bottles (750ml): ${bottlesFrom750ml.toFixed(2)}</p>
