@@ -15,6 +15,16 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
     const wine = totalDrinks * 0.2;
     const nonAlcoholic = totalDrinks * 0.1;
 
+    // Calculate ounces of liquor needed for cocktails
+    const ouncesPerCocktail = 1.5;
+    const totalOunces = cocktails * ouncesPerCocktail;
+
+    // Convert ounces to bottles
+    const litersPerBottle = 33.814;
+    const mlPerBottle = 25.36;
+    const bottlesFromLiters = totalOunces / litersPerBottle;
+    const bottlesFrom750ml = totalOunces / mlPerBottle;
+
     // Specific quantities
     const beerCases = Math.ceil(beer / 12);
     const wineBottles = Math.ceil(wine / 5);
@@ -33,6 +43,9 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
         <p>Beer: ${beer.toFixed(2)} drinks (Approx. ${beerCases} cases)</p>
         <p>Wine: ${wine.toFixed(2)} drinks (Approx. ${wineBottles} bottles)</p>
         <p>Non-Alcoholic: ${nonAlcoholic.toFixed(2)} drinks</p>
+        <h3>Liquor Bottle Requirements</h3>
+        <p>Liquor Bottles (1 liter): ${bottlesFromLiters.toFixed(2)}</p>
+        <p>Liquor Bottles (750ml): ${bottlesFrom750ml.toFixed(2)}</p>
         <h3>Additional Supplies</h3>
         <p>Ice: ${icePounds.toFixed(2)} pounds (Approx. ${iceBags} bags)</p>
         <p>Napkins: ${napkins} napkins</p>
