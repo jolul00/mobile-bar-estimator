@@ -6,6 +6,7 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
     const hours = document.getElementById('hours').value;
     const drinkRate = document.getElementById('drinkRate').value;
     const caseSize = document.getElementById('caseSize').value;
+    const kegSize = document.getElementById('kegSize').value;
 
     // Calculate total drinks
     const totalDrinks = guests * hours * drinkRate;
@@ -28,6 +29,7 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
 
     // Specific quantities
     const beerCases = Math.ceil(beer / caseSize);
+    const beerKegs = Math.ceil(beer / kegSize);
     const wineBottles = Math.ceil(wine / 5);
     const liquorBottles = Math.ceil(cocktails * 1.5 / 25.4);
 
@@ -41,7 +43,11 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
         <h2>Estimated Alcohol Requirements and Additional Supplies</h2>
         <p>Total Drinks: ${totalDrinks.toFixed(2)}</p>
         <p>Cocktails: ${cocktails.toFixed(2)} drinks (Approx. ${liquorBottles} bottles of liquor)</p>
-        <p>Beer: ${beer.toFixed(2)} drinks (Approx. ${beerCases} cases of ${caseSize}-pack)</p>
+        <p>Beer: ${beer.toFixed(2)} drinks</p>
+        <ul>
+            <li>Approx. ${beerCases} cases of ${caseSize}-pack</li>
+            <li>Approx. ${beerKegs} kegs of ${kegSize} pints</li>
+        </ul>
         <p>Wine: ${wine.toFixed(2)} drinks (Approx. ${wineBottles} bottles)</p>
         <p>Non-Alcoholic: ${nonAlcoholic.toFixed(2)} drinks</p>
         <h3>Liquor Bottle Requirements</h3>
