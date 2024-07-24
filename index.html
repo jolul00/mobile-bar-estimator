@@ -16,6 +16,12 @@
             <input type="number" id="hours" required><br><br>
             <label for="drinkRate">Average Drinks per Hour:</label>
             <input type="number" id="drinkRate" step="0.1" required><br><br>
+            <label for="caseSize">Beer Case Size:</label>
+            <select id="caseSize" required>
+                <option value="6">6-pack</option>
+                <option value="12">12-pack</option>
+                <option value="24" selected>24-pack</option>
+            </select><br><br>
             <button type="submit">Calculate</button>
         </form>
         <div class="result" id="result"></div>
