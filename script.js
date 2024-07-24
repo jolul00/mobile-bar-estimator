@@ -12,9 +12,9 @@ document.getElementById('estimationForm').addEventListener('submit', function(ev
     const totalDrinks = guests * hours * drinkRate;
 
     // Split guests by drink preference
-    const liquorDrinkers = guests * 0.5;
-    const beerDrinkers = guests * 0.3;
-    const wineDrinkers = guests * 0.2;
+    const liquorDrinkers = guests * 0.5; // 50% of guests will drink liquor
+    const beerDrinkers = guests * 0.3;   // 30% of guests will drink beer
+    const wineDrinkers = guests * 0.2;   // 20% of guests will drink wine
 
     // Calculate total drinks by type
     const liquorDrinks = liquorDrinkers * hours * drinkRate;
